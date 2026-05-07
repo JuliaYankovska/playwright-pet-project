@@ -1,6 +1,7 @@
 const { test, expect } = require("@playwright/test");
 const { generateUserData } = require("../test_data/UserData");
 
+const SignInPage = require("../page_object/SignInPage");
 const CareersHomePage = require("../page_object/CareersHomePage");
 const JobsSearchPage = require("../page_object/JobsSearchPage");
 const JobDetailsPage = require("../page_object/JobDetailsPage");
@@ -12,6 +13,7 @@ let careersHomePage;
 let jobsSearchPage;
 let jobDetailsPage;
 let applicationFormPage;
+let signInPage;
 
 test.describe("Careers job search smoke tests", () => {
   test.beforeEach(async ({ page }) => {
@@ -20,6 +22,7 @@ test.describe("Careers job search smoke tests", () => {
     jobsSearchPage = new JobsSearchPage(page);
     jobDetailsPage = new JobDetailsPage(page);
     applicationFormPage = new ApplicationFormPage(page);
+    signInPage = new SignInPage(page);
 
     await page.goto("/careers/");
     await cookieBanner.acceptIfVisible();
@@ -39,16 +42,25 @@ test.describe("Careers job search smoke tests", () => {
     await expect(jobDetailsPage.applyWithLinkedIn).toBeVisible();
   });
 
-  test("User can fill job application form", async ({ page }) => {
-    const user = generateUserData();
+test("User create new Account", async ({ page }) => {
+  const user = generateUserData();
 
-    await jobsSearchPage.openFirstJob();
-    await jobDetailsPage.openApplyDropdown();
+  await jobsSearchPage.openFirstJob();
+  await page.waitForLoadState();
 
-    await expect(jobDetailsPage.applyManualOption).toBeVisible();
+  await expect(jobDetailsPage.createAlertButton).toBeVisible();
+  await expect(jobDetailsPage.createAlertButton).toBeEnabled();
+  await jobDetailsPage.createAlertButton.click();
 
-    await jobDetailsPage.clickApplyManualOption();
+  await expect(signInPage.signInHeader).toBeVisible();
+  await expect(signInPage.createAccountLink).toBeVisible();
+  await signInPage.clickCreateAccount();
 
-    await expect(applicationFormPage.email).toBeVisible();
-  });
+  await expect(applicationFormPage.email).toBeVisible();
+  await applicationFormPage.fillApplicationForm(user);
+
+  await expect(applicationFormPage.email).toHaveValue(user.email);
+  await expect(applicationFormPage.firstName).toHaveValue(user.firstName);
+  await expect(applicationFormPage.lastName).toHaveValue(user.lastName);
+});
 });
