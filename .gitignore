@@ -1,15 +1,9 @@
-# Dependencies
+
+# Playwright
 node_modules/
-
-# Playwright results & reports
-test-results/
-playwright-report/
-blob-report/
-
-# Playwright internal
-playwright/.cache/
-playwright/.auth/
-
-# OS / IDE
-.DS_Store
-.vscode/
+.env
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
