@@ -5,6 +5,7 @@ class LoginPage {
         this.loginPasswordInput = page.locator('input[data-qa="login-password"]');
         this.loginButton = page.getByRole('button', { name: 'Login' });
         this.loginErrorMessage = page.locator('.login-form p');
+        this.logoutButton = page.getByRole('link', { name: 'Logout' });
 
     }
 async goto() {
@@ -16,6 +17,8 @@ async login(email, password) {
         await this.loginPasswordInput.fill(password);
         await this.loginButton.click();
     }
+
+
 }
 
 module.exports = { LoginPage };
