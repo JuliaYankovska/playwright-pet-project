@@ -8,12 +8,24 @@ class CartPage {
     this.registerLoginPrompt = page.getByText('Register / Login');
   }
 
+  deleteButtonForRow(index) {
+    return this.cartRows.nth(index).locator('.cart_quantity_delete');
+  }
+
   async proceedToCheckout() {
     await this.checkoutButton.click();
   }
 
   async getCartItemsCount() {
     return this.cartRows.count();
+  }
+
+  async removeProductByIndex(index) {
+    await this.deleteButtonForRow(index).click();
+  }
+
+  async removeFirstProduct() {
+    await this.removeProductByIndex(0);
   }
 }
 

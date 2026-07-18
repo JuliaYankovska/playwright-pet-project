@@ -27,6 +27,10 @@ class ProductsPage {
     await productCard.hover();
     await productCard.getByText("Add to cart").first().click();
   }
+
+  async isLoaded() {
+  return this.allProductsHeading.isVisible();
+}
 }
 
 module.exports = { ProductsPage };

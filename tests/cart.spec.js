@@ -40,4 +40,14 @@ test.describe('Cart', () => {
     await productsPage.viewCartLink.click();
     expect(await cartPage.getCartItemsCount()).toBe(2);
   });
+
+  test('should remove a product from cart', async () => {
+  await productsPage.addFirstProductToCart();
+  await productsPage.viewCartLink.click();
+
+  const initialCount = await cartPage.getCartItemsCount();
+  await cartPage.removeFirstProduct();
+
+  await expect(cartPage.cartRows).toHaveCount(initialCount - 1);
+});
 });
