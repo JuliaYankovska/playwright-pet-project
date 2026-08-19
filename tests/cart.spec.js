@@ -1,8 +1,8 @@
-const { test, expect } = require('@playwright/test');
-const { ProductsPage } = require('../page-objects/ProductsPage');
-const { CartPage } = require('../page-objects/CartPage');
+const { test, expect } = require("@playwright/test");
+const { ProductsPage } = require("../page-objects/ProductsPage");
+const { CartPage } = require("../page-objects/CartPage");
 
-test.describe('Cart', () => {
+test.describe("Cart", () => {
   let productsPage;
   let cartPage;
 
@@ -12,12 +12,12 @@ test.describe('Cart', () => {
     await productsPage.goto();
   });
 
-  test('User can add a product to cart', async () => {
+  test("User can add a product to cart", async () => {
     await productsPage.addFirstProductToCart();
     await expect(productsPage.addedModalTitle).toBeVisible();
   });
 
-  test('should see added product reflected in cart', async () => {
+  test("should see added product reflected in cart", async () => {
     await productsPage.addFirstProductToCart();
     await expect(productsPage.addedModalTitle).toBeVisible();
     await productsPage.viewCartLink.click();
@@ -25,7 +25,7 @@ test.describe('Cart', () => {
     expect(await cartPage.getCartItemsCount()).toBeGreaterThan(0);
   });
 
-  test('should close modal and stay on products page after Continue Shopping', async () => {
+  test("should close modal and stay on products page after Continue Shopping", async () => {
     await productsPage.addFirstProductToCart();
     await expect(productsPage.addedModalTitle).toBeVisible();
     await productsPage.clickContinueShoppingButton();
@@ -33,7 +33,7 @@ test.describe('Cart', () => {
     await expect(productsPage.allProductsHeading).toBeVisible();
   });
 
-  test('should add exact number of products to cart', async () => {
+  test("should add exact number of products to cart", async () => {
     await productsPage.addFirstProductToCart();
     await productsPage.clickContinueShoppingButton();
     await productsPage.addProductToCartByIndex(1);
@@ -41,13 +41,13 @@ test.describe('Cart', () => {
     expect(await cartPage.getCartItemsCount()).toBe(2);
   });
 
-  test('should remove a product from cart', async () => {
-  await productsPage.addFirstProductToCart();
-  await productsPage.viewCartLink.click();
+  test("should remove a product from cart", async () => {
+    await productsPage.addFirstProductToCart();
+    await productsPage.viewCartLink.click();
 
-  const initialCount = await cartPage.getCartItemsCount();
-  await cartPage.removeFirstProduct();
+    const initialCount = await cartPage.getCartItemsCount();
+    await cartPage.removeFirstProduct();
 
-  await expect(cartPage.cartRows).toHaveCount(initialCount - 1);
-});
+    await expect(cartPage.cartRows).toHaveCount(initialCount - 1);
+  });
 });

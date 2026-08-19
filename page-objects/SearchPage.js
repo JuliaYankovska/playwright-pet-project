@@ -1,14 +1,16 @@
 class SearchPage {
   constructor(page) {
     this.page = page;
-    this.searchInput = page.locator('#search_product');
-    this.searchButton = page.locator('#submit_search');
-    this.searchedProductsHeading = page.getByRole('heading', { name: 'Searched Products' });
-    this.productCards = page.locator('.product-image-wrapper');
+    this.searchInput = page.locator("#search_product");
+    this.searchButton = page.locator("#submit_search");
+    this.searchedProductsHeading = page.getByRole("heading", {
+      name: "Searched Products",
+    });
+    this.productCards = page.locator(".product-image-wrapper");
   }
 
   async goto() {
-    await this.page.goto('/products');
+    await this.page.goto("/products");
   }
 
   async searchFor(term) {
@@ -21,7 +23,7 @@ class SearchPage {
   }
 
   productNameLocator(index) {
-    return this.productCards.nth(index).locator('.productinfo p');
+    return this.productCards.nth(index).locator(".productinfo p");
   }
 
   async getProductNameByIndex(index) {

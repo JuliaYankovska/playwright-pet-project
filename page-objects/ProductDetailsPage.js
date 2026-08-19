@@ -4,7 +4,7 @@ class ProductDetailsPage {
 
     this.productName = page.locator('.product-information h2');
     this.categoryText = page.getByText(/Category:/);
-    this.priceText = page.locator('.product-information span').filter({ hasText: 'Rs.' });
+    this.priceText = page.locator('.product-information span').filter({ hasText: 'Rs.' }).last();
     this.availabilityText = page.getByText(/Availability:/);
     this.conditionText = page.getByText(/Condition:/);
     this.brandText = page.getByText(/Brand:/);
