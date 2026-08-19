@@ -32,4 +32,10 @@ const newUser = {
   mobileNumber: faker.phone.number('##########'),
 };
 
-module.exports = { invalidUser, validUser, validEmailWrongPassword, newUser }
+const reviewData = {
+  name: faker.person.fullName(),
+  email: faker.internet.email(),
+  review: 'Great product, exactly as described.',
+};
+
+module.exports = { invalidUser, validUser, validEmailWrongPassword, newUser, reviewData };

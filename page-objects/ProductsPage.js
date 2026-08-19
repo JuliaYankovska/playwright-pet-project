@@ -6,7 +6,7 @@ class ProductsPage {
     this.continueShoppingButton = page.getByRole("button", { name: "Continue Shopping" });
     this.viewCartLink = page.getByRole("link", { name: "View Cart" });
     this.allProductsHeading = page.getByRole("heading", { name: "All Products" });
-    this.productCards = page.locator('.product-image-wrapper'); // додано
+    this.productCards = page.locator('.product-image-wrapper'); 
   }
 
   async goto() {
@@ -31,6 +31,12 @@ class ProductsPage {
   async isLoaded() {
   return this.allProductsHeading.isVisible();
 }
+
+  async viewProductByIndex(index) {
+    const productCard = this.productCards.nth(index);
+    const productId = await productCard.locator('a.add-to-cart').first().getAttribute('data-product-id');
+    await this.page.goto(`/product_details/${productId}`);
+  }
 }
 
 module.exports = { ProductsPage };

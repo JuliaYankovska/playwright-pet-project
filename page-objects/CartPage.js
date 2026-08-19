@@ -1,15 +1,20 @@
 class CartPage {
   constructor(page) {
     this.page = page;
-    this.cartTable = page.locator('#cart_info_table');
-    this.cartRows = page.locator('#cart_info_table tbody tr');
-    this.checkoutButton = page.getByRole("link", { name: "Proceed To Checkout" });
-    this.emptyCartMessage = page.getByText('Cart is empty! Click here to buy products.');
-    this.registerLoginPrompt = page.getByText('Register / Login');
+    this.cartTable = page.locator("#cart_info_table");
+    this.cartRows = page.locator("#cart_info_table tbody tr");
+    this.checkoutButton = page.getByRole("link", {
+      name: "Proceed To Checkout",
+    });
+    this.emptyCartMessage = page.getByText(
+      "Cart is empty! Click here to buy products.",
+    );
+    this.registerLoginPrompt = page.getByText("Register / Login");
+    this.cartQuantity = (index) => this.cartRows.nth(index).locator('.cart_quantity button');
   }
 
   deleteButtonForRow(index) {
-    return this.cartRows.nth(index).locator('.cart_quantity_delete');
+    return this.cartRows.nth(index).locator(".cart_quantity_delete");
   }
 
   async proceedToCheckout() {
@@ -27,6 +32,11 @@ class CartPage {
   async removeFirstProduct() {
     await this.removeProductByIndex(0);
   }
+
+   async getQuantityByIndex(index) {
+    return (await this.cartQuantity(index).textContent()).trim();
+  }
+ 
 }
 
 module.exports = { CartPage };
