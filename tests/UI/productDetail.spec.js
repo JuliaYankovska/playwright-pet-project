@@ -1,9 +1,9 @@
 const { test, expect } = require("@playwright/test");
-const { ProductsPage } = require("../page-objects/ProductsPage");
-const { ProductDetailsPage } = require("../page-objects/ProductDetailsPage");
-const { CartPage } = require("../page-objects/CartPage");
-const { reviewData } = require("../data/testData");
-const { blockAds } = require('../fixtures/blockAds');
+const { ProductsPage } = require("../../page-objects/ProductsPage");
+const { ProductDetailsPage } = require("../../page-objects/ProductDetailsPage");
+const { CartPage } = require("../../page-objects/CartPage");
+const { reviewData } = require("../../data/testData");
+const { blockAds } = require('../../fixtures/blockAds');
 
 test.describe('Product details page', () => {
     let productsPage;

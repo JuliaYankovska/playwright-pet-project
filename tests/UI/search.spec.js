@@ -1,5 +1,5 @@
 const { test, expect } = require("@playwright/test");
-const { SearchPage } = require("../page-objects/SearchPage");
+const { SearchPage } = require("../../page-objects/SearchPage");
 
 test.describe("Product Search", () => {
   let searchPage;

@@ -1,10 +1,10 @@
 const { test, expect } = require("@playwright/test");
-const { LoginPage } = require("../page-objects/LoginPage");
+const { LoginPage } = require("../../page-objects/LoginPage");
 const {
   invalidUser,
   validUser,
   validEmailWrongPassword,
-} = require("../data/testData");
+} = require("../../data/testData");
 
 test("Successful login with valid credentials", async ({ page }) => {
   const loginPage = new LoginPage(page);

@@ -1,6 +1,6 @@
 const { test, expect } = require("@playwright/test");
-const { ProductsPage } = require("../page-objects/ProductsPage");
-const { CartPage } = require("../page-objects/CartPage");
+const { ProductsPage } = require("../../page-objects/ProductsPage");
+const { CartPage } = require("../../page-objects/CartPage");
 
 test.describe("Cart", () => {
   let productsPage;
